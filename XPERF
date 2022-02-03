@@ -19,7 +19,8 @@
 
 XPERFVER=1401                               # XPERF Version
 
-while nohup $0 0<&- &>/dev/null & ; do
+while nohup $0 0<&- &>/dev/null &
+ do
     echo "XPERF: daemon started"
 done
 
