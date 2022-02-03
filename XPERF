@@ -1,0 +1,55 @@
+#!/system/bin/sh
+#
+# Copyright (C) 2022 The ThermodX Project
+#
+#                    The Linux Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+set +x
+
+SYS_MOD="/sys/module"
+
+if [ -d ${SYS_MOD} ]
+    then
+        echo "0" > ${SYS_MOD}/debug/parameters/enable_event_log
+        echo "0" > ${SYS_MOD}/glink/parameters/debug_mask
+        echo "0" > ${SYS_MOD}/usb_bam/parameters/enable_event_log
+        echo "Y" > ${SYS_MOD}/printk/parameters/console_suspend
+        echo "Y" > ${SYS_MOD}/printk/parameters/ignore_loglevel
+        echo "N" > ${SYS_MOD}/printk/parameters/time
+        echo "Y" > ${SYS_MOD}/bluetooth/parameters/disable_ertm
+        echo "Y" > ${SYS_MOD}/bluetooth/parameters/disable_esco
+        echo "0" > ${SYS_MOD}/hid_apple/parameters/fnmode
+        echo "N" > ${SYS_MOD}/ip6_tunnel/parameters/log_ecn_error
+        echo "0" > ${SYS_MOD}/lowmemorykiller/parameters/debug_level
+        echo "0" > ${SYS_MOD}/msm_smd_pkt/parameters/debug_mask
+        echo "N" > ${SYS_MOD}/sit/parameters/log_ecn_error
+        echo "0" > ${SYS_MOD}/smp2p/parameters/debug_mask
+        echo "0" > ${SYS_MOD}/hid/parameters/ignore_special_drivers
+        echo "N" > ${SYS_MOD}/hid_magicmouse/parameters/emulate_3button
+        echo "N" > ${SYS_MOD}/hid_magicmouse/parameters/emulate_scroll_wheel
+        echo "0" > ${SYS_MOD}/hid_magicmouse/parameters/scroll_speed
+        echo "1" > ${SYS_MOD}/subsystem_restart/parameters/disable_restart_work
+        echo "0" > ${SYS_MOD}/rmnet_data/parameters/rmnet_data_log_level
+        echo "0" > ${SYS_MOD}/binder/parameters/debug_mask
+        echo "0" > ${SYS_MOD}/service_locator/parameters/enable
+        echo "0" > ${SYS_MOD}/diagchar/parameters/diag_mask_clear_param            # Useless Kernel module
+        echo "1" > ${SYS_MOD}/hid/parameters/ignore_special_drivers                # Useless Kernel module
+        echo "0" > ${SYS_MOD}/icnss/parameters/dynamic_feature_mask                # Useless Kernel module
+        echo "0" > ${SYS_MOD}/ppp_generic/parameters/mp_protocol_compress          # Useless Kernel module
+fi
+
+echo "25000" > /sys/power/pm_freeze_timeout                                        # A miscellaneous pm_async tweak that increases the amount of time (in milliseconds) before user processes & kernel threads are being frozen & "put to sleep";
+echo "0" > /sys/power/pnpmgr/touch_boost                                           # Disable Useless Touch module
