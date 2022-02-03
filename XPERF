@@ -54,9 +54,9 @@ fi
 echo "25000" > /sys/power/pm_freeze_timeout                                        # A miscellaneous pm_async tweak that increases the amount of time (in milliseconds) before user processes & kernel threads are being frozen & "put to sleep";
 echo "0" > /sys/power/pnpmgr/touch_boost                                           # Disable Useless Touch module
 
-if [ -d "/sys/module/cpu_boost/parameters/boost_ms" ]; then                        # Disable useless parameters
-    echo "0" > /sys/module/cpu_boost/parameters/boost_ms
+if [ -d "${SYS_MOD}/cpu_boost/parameters/boost_ms" ]; then                        # Disable useless parameters
+    echo "0" > ${SYS_MOD}/cpu_boost/parameters/boost_ms
 fi
-if [ -d "/sys/module/msm_performance/parameters/touchboost" ]; then                # Disable Useless parameters
-    echo "0" > /sys/module/msm_performance/parameters/touchboost
+if [ -d "${SYS_MOD}/msm_performance/parameters/touchboost" ]; then                # Disable Useless parameters
+    echo "0" > ${SYS_MOD}/msm_performance/parameters/touchboost
 fi
