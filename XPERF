@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+export PROMPT_COMMAND="sync"
 set +x
 
 SYS_MOD="/sys/module"
